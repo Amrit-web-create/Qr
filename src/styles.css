@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f7efe7;
+  --color-paper: #fffcf8;
+  --color-ink: #3e3239;
+  --color-rose: #6b5560;
+  --color-blush: #9e8189;
+  --color-sand: #c7a9a3;
+  --color-linen: #e8d2c4;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", "Iowan Old Style", palatino, serif;
+  --shadow-lift: 0 28px 70px rgb(62 50 57 / 0.14);
+  --radius-card: 1.75rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-cream);
+    color: var(--color-ink);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+.display {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.96;
+}
+
+.ghost-word {
+  font-size: 8rem;
+  line-height: 0.8;
+}
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  background: var(--color-cream);
+  animation: boot-out 0.72s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+.boot-mark {
+  text-align: center;
+}
+
+.boot-rule {
+  height: 1px;
+  width: 9rem;
+  margin: 1rem auto 0;
+  background: var(--color-ink);
+  transform-origin: left;
+  animation: rule 0.55s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes boot-out {
+  0%,
+  62% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-y {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 22s linear infinite;
+}
+
+@keyframes load-rule {
+  0% {
+    transform: scaleX(0.08);
+  }
+  70% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0.08);
+  }
+}
+
+.load-rule {
+  transform-origin: left;
+  animation: load-rule 1.8s cubic-bezier(0.2, 0, 0, 1) infinite;
+}
+
+.canvas-stage {
+  background-color: var(--color-linen);
+  background-image: radial-gradient(var(--color-sand) 1px, transparent 1px);
+  background-size: 1rem 1rem;
+}
+
+.orb {
+  background: radial-gradient(circle at 32% 28%, var(--color-linen), var(--color-blush) 46%, var(--color-ink) 78%);
+}
+
+.tilt {
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
